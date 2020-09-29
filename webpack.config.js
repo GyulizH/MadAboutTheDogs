@@ -18,20 +18,18 @@ const configuration = {
   },
   devtool: 'cheap-module-eval-source-map',
   entry: {
-    app: './src/index.ts',
+    app: './src/index.tsx',
   },
   mode: 'development',
   module: {
     rules: [
       {
-        loader: 'html-loader',
-        options: {
-          attrs: ['img:src', 'link:href'],
-        },
-        test: /\.html$/u,
+        test: /\.s[ac]ss$/i,
+        exclude: /node_modules/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.ts$/u,
+        test: /\.tsx?$/u,
         use: [
           {
             loader: 'ts-loader',
@@ -49,6 +47,7 @@ const configuration = {
         use: [
           'style-loader',
           'css-loader',
+          'sass-loader',
           {
             loader: 'postcss-loader',
             options: {
@@ -97,7 +96,7 @@ const configuration = {
     }),
   ],
   resolve: {
-    extensions: ['.js', '.ts'],
+    extensions: ['.js', '.ts', '.tsx'],
     mainFields: ['browser', 'module', 'main'],
   },
   watch: true,

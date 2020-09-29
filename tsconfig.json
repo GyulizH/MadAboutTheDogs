@@ -22,8 +22,9 @@
     "incremental": true,
     "resolveJsonModule": true,
     "sourceMap": true,
-    "tsBuildInfoFile": "./.cache/typescript"
+    "tsBuildInfoFile": "./.cache/typescript",
+    "jsx": "react"
   },
-  "files": ["./src/index.ts"],
-  "include": ["./**/*"]
+
+  "include": ["./src/**/*"]
 }
