@@ -5,4 +5,5 @@ package.json
 tsconfig.json
 webpack.config.js
 index.tsx
-DogPicturesGalery.tsx
+DogPicturesGallery.tsx
+

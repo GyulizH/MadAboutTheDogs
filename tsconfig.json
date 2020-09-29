@@ -15,7 +15,7 @@
     "pretty": true,
     "rootDir": "src",
     "strict": true,
-    "strictNullChecks": true,
+    "strictNullChecks": false,
     "target": "es2019",
     "typeRoots": ["./@types", "node_modules/@types"],
     "experimentalDecorators": true,

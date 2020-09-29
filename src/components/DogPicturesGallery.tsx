@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './DogPicturesGalery.scss';
+import './DogPicturesGallery.scss';
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import * as tf from "@tensorflow/tfjs";
 
@@ -7,23 +7,23 @@ import * as tf from "@tensorflow/tfjs";
 
 
 interface State {
-  file?: string;
-  imgUrl?:string | ArrayBuffer;
-  model?:any;
-  results?:any;
-  dogPicsUrls?:any;
+  file: string;
+  imgUrl:string | ArrayBuffer;
+  model:any;
+  results:any;
+  dogPicsUrls:any;
   page?:number;
-  loading?:boolean;
+  loading:boolean;
   prevY?:number;
-  numberOfItems?:number;
+  numberOfItems:number;
 };
 
 
-export default class DogPicturesGalery extends React.Component <{}, State>{
-   imageRef: React.RefObject<HTMLImageElement>
-   loadingRef: React.RefObject<HTMLDivElement>
+export default class DogPicturesGallery extends React.Component <{}, State>{
+  imageRef: React.RefObject<HTMLImageElement>
+  loadingRef: React.RefObject<HTMLDivElement>
 
-   private observer: IntersectionObserver | undefined;
+  private observer: IntersectionObserver | undefined;
 
   constructor(props:any) {
     super(props);
@@ -46,20 +46,19 @@ export default class DogPicturesGalery extends React.Component <{}, State>{
 
 
   async componentDidMount(): Promise <any> {
-    tf.getBackend()
+    tf.getBackend() // using tf backend was the only way for me to make tensorflow mobilenet predictions work, however I always received false predictions.
     const model = await this.loadModel()
     this.setState({
       model:model
     } as State)
     console.log(tf.getBackend());
     this.observer = new IntersectionObserver(([entry]) => {
-       if(entry.isIntersecting){
-         this.setState({ loading: true });
-         setTimeout(() => {
-           this.setState({ numberOfItems: this.state.numberOfItems + 8, loading: false });
-         }, 500);
-         }
-       console.log("LOADINGGG...")
+        if(entry.isIntersecting){
+          this.setState({ loading: true });
+          setTimeout(() => {
+            this.setState({ numberOfItems: this.state.numberOfItems + 8, loading: false });
+          }, 500);
+        }
       },
       {
         root: document.getElementsByClassName("main")[0],
@@ -67,10 +66,12 @@ export default class DogPicturesGalery extends React.Component <{}, State>{
         threshold: 1.0
       });
 
-     this.observer.observe(this.loadingRef.current)
+    this.observer.observe(this.loadingRef.current)
 
   }
 
+  //when i am getting the images since image tag already has lazy loading attribute, i do not need to use an intersection observer or something else to
+  //achieve lazy loading
   showDogImages (){
     let items = []
     for (let i = 0; i < this.state.numberOfItems; i++) {
@@ -84,18 +85,18 @@ export default class DogPicturesGalery extends React.Component <{}, State>{
     const results = await this.state.model.classify(this.imageRef.current);
     this.setState({
       results: results
-     } as State, () => this.fetchDogListByBreed())
+    } as State, () => this.fetchDogListByBreed())
   }
 
   resetUploadedImg(){
     this.setState({
-       imgUrl: '',
+      imgUrl: '',
       results: [],
       dogPicsUrls: []
     })
-    console.log("helloo")
   }
 
+  //here if I was getting the write predictions, i would get the results from the state and make an http request with it to get the dog images.
   fetchDogListByBreed (){
     fetch(`https://dog.ceo/api/breed/hound/images`)
       .then(response => response.json())
@@ -104,10 +105,10 @@ export default class DogPicturesGalery extends React.Component <{}, State>{
         for(let i = 0;i<data.message.length;i++){
           tmpArray.push(data.message[i])
         }
-        //use spread operator
+
         this.setState({
           dogPicsUrls: tmpArray,
-         // loading:false
+          // loading:false
         } as State)
       } )
   }
@@ -151,47 +152,47 @@ export default class DogPicturesGalery extends React.Component <{}, State>{
     }
     return(
       <div className="DogPicturesGalery-Container">
-      <div className="DogPictureUpload-Wrapper">
-        <div className="Upload-Img-Wrapper">
-          <form onSubmit={(e)=>this.handleSubmit(e)}>
-            <label htmlFor="files" className="Upload-Img-Label">Select Image</label>
-            <input className="upload-Image-Input"
-                   type="file"
-                   onChange={(e)=>this.handleImageChange(e)}
-            />
-          </form>
-        </div>
-        <div className="uploaded-Image-Preview">
-          {imgPreview}
-        </div>
-        <div className="DogPictureBreed">
-          {this.state.results && <span>Results</span>}
-          <ul>
-            {this.state.results?.map((result:any) => {
-              return(<li>
-                {result.className}
-              </li>)
-            })}
-          </ul>
-        </div>
-        <button className="Reset-Img" onClick={this.resetUploadedImg}>RESET</button>
-      </div>
-      <div className="DogPicturesList">
-        <p>DOG PICTURES LIST</p>
-        <div className="Dog-Picture-Item">
-          <div>
-            {this.showDogImages()}
+        <div className="DogPictureUpload-Wrapper">
+          <div className="Upload-Img-Wrapper">
+            <form onSubmit={(e)=>this.handleSubmit(e)}>
+              <label htmlFor="files" className="Upload-Img-Label">Select Image</label>
+              <input className="upload-Image-Input"
+                     type="file"
+                     onChange={(e)=>this.handleImageChange(e)}
+              />
+            </form>
           </div>
+          <div className="uploaded-Image-Preview">
+            {imgPreview}
+          </div>
+          <div className="DogPictureBreed">
+            {this.state.results && <span>Results</span>}
+            <ul>
+              {this.state.results?.map((result:any) => {
+                return(<li>
+                  {result.className}
+                </li>)
+              })}
+            </ul>
+          </div>
+          <button className="Reset-Img" onClick={this.resetUploadedImg}>RESET</button>
         </div>
-        <div
-          ref={this.loadingRef}
-          style={loadingCSS}
-        >
+        <div className="DogPicturesList">
+          <p>DOG PICTURES LIST</p>
+          <div className="Dog-Picture-Item">
+            <div>
+              {this.showDogImages()}
+            </div>
+          </div>
+          <div
+            ref={this.loadingRef}
+            style={loadingCSS}
+          >
           <span style={loadingTextCSS}>
             Loading Images...
           </span>
+          </div>
         </div>
-      </div>
       </div>
     )
   }
