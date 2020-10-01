@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DogPicturesGallery should render correctly 1`] = `
+<div
+  className="DogPicturesGalery-Container"
+>
+  <div
+    className="DogPictureUpload-Wrapper"
+  >
+    <div
+      className="Upload-Img-Wrapper"
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <label
+          className="Upload-Img-Label"
+          htmlFor="files"
+        >
+          Select Image
+        </label>
+        <input
+          className="upload-Image-Input"
+          onChange={[Function]}
+          type="file"
+        />
+      </form>
+    </div>
+    <div
+      className="uploaded-Image-Preview"
+    >
+      <div
+        style={
+          Object {
+            "fontSize": "20px",
+            "padding": "70px",
+          }
+        }
+      >
+        Please select an Image for Preview
+      </div>
+    </div>
+    <div
+      className="DogPictureBreed"
+    >
+      <ul />
+    </div>
+    <button
+      className="Reset-Img"
+      onClick={[Function]}
+    >
+      RESET
+    </button>
+  </div>
+  <div
+    className="DogPicturesList"
+  >
+    <p>
+      DOG PICTURES LIST
+    </p>
+    <div
+      className="Dog-Picture-Item"
+    >
+      <div>
+        <div>
+          <img
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <img
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <img
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <img
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <img
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <img
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <img
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <img
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <img
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <img
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      style={
+        Object {
+          "height": "100px",
+          "margin": "30px",
+        }
+      }
+    >
+      <span
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        Loading Images...
+      </span>
+    </div>
+  </div>
+</div>
+`;

@@ -1,11 +1,12 @@
 import React from 'react'
-import * as renderer from 'react-test-renderer';
-
+import renderer from 'react-test-renderer';
 import DogPicturesGallery from './DogPicturesGallery';
 
-describe('<DogPicturesGallery', ():void => {
+describe('DogPicturesGallery', ():void => {
   it('should render correctly', ():void => {
-    expect.assertions(0);
+     /* Test the state after async functions, write a function to be called  */
+     /* After the async calls finished inside dogpicturesgallery */
+    expect.assertions(1);
     const wrapper = renderer.create(<DogPicturesGallery/>)
     expect(wrapper.toJSON()).toMatchSnapshot()
   })

@@ -16,14 +16,15 @@
     "rootDir": "src",
     "strict": true,
     "strictNullChecks": false,
-    "target": "es2019",
+    "target": "es5",
     "typeRoots": ["./@types", "node_modules/@types"],
     "experimentalDecorators": true,
     "incremental": true,
     "resolveJsonModule": true,
     "sourceMap": true,
     "tsBuildInfoFile": "./.cache/typescript",
-    "jsx": "react"
+    "jsx": "react",
+    "esModuleInterop": true
   },
 
   "include": ["./src/**/*"]
